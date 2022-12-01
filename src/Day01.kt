@@ -1,7 +1,7 @@
 fun main() {
-    fun part1(input: List<String>): Int {
+    fun groupElves(input: List<String>): MutableList<Int> {
         var currentElf: Int = 0
-        val elfs = mutableListOf<Int>()
+        val elves = mutableListOf<Int>()
 
         for(line in input)
         {
@@ -10,36 +10,27 @@ fun main() {
                 currentElf += line.toInt()
             }else
             {
-                elfs.add(currentElf)
+                elves.add(currentElf)
                 currentElf = 0
             }
         }
-        elfs.add(currentElf)
+        elves.add(currentElf)
+        return elves
+    }
 
-        return elfs.max()
+    fun part1(input: List<String>): Int {
+        val elves = groupElves(input)
+
+        return elves.max()
     }
 
     fun part2(input: List<String>): Int {
-        var currentElf: Int = 0
-        val elfs = mutableListOf<Int>()
+        val elves = groupElves(input)
+        
+        elves.sort()
+        elves.reverse()
 
-        for(line in input)
-        {
-            if(line.isNotEmpty())
-            {
-                currentElf += line.toInt()
-            }else
-            {
-                elfs.add(currentElf)
-                currentElf = 0
-            }
-        }
-        elfs.add(currentElf)
-
-        elfs.sort()
-        elfs.reverse()
-
-        return elfs.take(3).sum()
+        return elves.take(3).sum()
     }
 
     // test if implementation meets criteria from the description, like:
